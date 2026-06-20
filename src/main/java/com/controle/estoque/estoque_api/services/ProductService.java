@@ -1,5 +1,6 @@
 package com.controle.estoque.estoque_api.services;
 
+import com.controle.estoque.estoque_api.models.Categoria;
 import com.controle.estoque.estoque_api.models.Produto;
 import com.controle.estoque.estoque_api.repositories.CategoryRepository;
 import com.controle.estoque.estoque_api.repositories.ProductRepository;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +37,9 @@ public class ProductService {
         }
 
         return productRepository.save(produto);
+    }
+
+    public List<Produto> listarTodos() {
+        return productRepository.findAll();
     }
 }
