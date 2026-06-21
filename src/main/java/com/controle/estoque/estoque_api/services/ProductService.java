@@ -7,6 +7,7 @@ import com.controle.estoque.estoque_api.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.management.RuntimeErrorException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -41,5 +42,30 @@ public class ProductService {
 
     public List<Produto> listarTodos() {
         return productRepository.findAll();
+    }
+
+    public Produto atualizar(Long id, Produto dadosAtualizados) {
+        Produto produtoExistentes = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        if (dadosAtualizados.getNome() != null) {
+            produtoExistentes.setNome(dadosAtualizados.getNome());
+        }
+        if (dadosAtualizados.getPreco() != null) {
+            produtoExistentes.setPreco(dadosAtualizados.getPreco());
+        }
+        if (dadosAtualizados.getQuantidade() != null) {
+            produtoExistentes.setQuantidade(dadosAtualizados.getQuantidade());
+        }
+
+        return productRepository.save(produtoExistentes);
+    }
+
+    public void deletar(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new RuntimeException("Produto não encontrado para exclusão");
+        }
+
+        productRepository.deleteById(id);
     }
 }
