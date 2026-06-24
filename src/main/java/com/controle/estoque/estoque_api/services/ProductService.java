@@ -58,6 +58,16 @@ public class ProductService {
             produtoExistentes.setQuantidade(dadosAtualizados.getQuantidade());
         }
 
+        if (dadosAtualizados.getCategoria() != null && dadosAtualizados.getCategoria().getId() != null) {
+            boolean categoriaExiste = categoryRepository.existsById(dadosAtualizados.getCategoria().getId());
+
+            if (!categoriaExiste) {
+                throw new RuntimeException("A nova categoria informada não existe.");
+            }
+
+            produtoExistentes.setCategoria(dadosAtualizados.getCategoria());
+        }
+
         return productRepository.save(produtoExistentes);
     }
 
