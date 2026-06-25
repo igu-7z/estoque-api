@@ -1,5 +1,6 @@
 package com.controle.estoque.estoque_api.services;
 
+import com.controle.estoque.estoque_api.exception.ResourceNotFoundException;
 import com.controle.estoque.estoque_api.models.Categoria;
 import com.controle.estoque.estoque_api.models.Produto;
 import com.controle.estoque.estoque_api.repositories.CategoryRepository;
@@ -44,9 +45,14 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public Produto buscarPorId(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
+    }
+
     public Produto atualizar(Long id, Produto dadosAtualizados) {
         Produto produtoExistentes = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
 
         if (dadosAtualizados.getNome() != null) {
             produtoExistentes.setNome(dadosAtualizados.getNome());

@@ -29,6 +29,12 @@ public class ProductController {
         return ResponseEntity.ok(produtos);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
+        Produto produto = productService.buscarPorId(id);
+        return ResponseEntity.ok(produto);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto dados) {
         Produto produtoAtualizado = productService.atualizar(id, dados);
