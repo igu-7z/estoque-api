@@ -16,7 +16,8 @@ Para construir uma base sólida e alinhada com as práticas de mercado, o projet
 
 O sistema vai além do CRUD básico, aplicando conceitos de arquitetura limpa e robustez no tratamento de dados:
 
-* **Validação Automática de Entradas (Bean Validation):** * O sistema impede o cadastro de produtos com o nome em branco ou vazio (`@NotBlank`).
+* **Validação Automática de Entradas (Bean Validation):** 
+    * O sistema impede o cadastro de produtos com o nome em branco ou vazio (`@NotBlank`).
     * Proteção financeira barrando preços menores ou iguais a zero (`@Positive`).
     * Controle de estoque inteligente que aceita produtos zerados, mas bloqueia quantidades negativas (`@PositiveOrZero`).
 * **Tratamento Global de Exceções (Exception Handler):** * Centralizador de erros que intercepta falhas de validação ou recursos não encontrados.
